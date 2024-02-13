@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form style="display: flex; flex-direction: column; max-width: 500px; margin: 0 auto;" action="https://httpbin.org/post" method="post">
+        <label for="name">Имя</label>
+        <input type="text" name="name" id="name">
+        <label for="email">Почта</label>
+        <input type="email" name="email" id="email">
+        <label for="desc">Описание</label>
+        <textarea name="desc" id="desc" cols="30" rows="10" placeholder="Описание"></textarea>
+        <button type="submit">Отправить</button>
+        <a href="./back.php">get_headers</a>
+    </form>
+</body>
+</html>
