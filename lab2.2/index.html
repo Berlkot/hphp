@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <style>
-        /* Styles for a simple appearance */
         .calculator {
             width: 250px;
             margin: 50px auto;
@@ -66,12 +65,10 @@
     </form>
 
     <script>
-        // Function to add characters to the display
         function addToDisplay(value) {
             document.getElementById('display').value += value;
         }
 
-        // Function to clear the display
         function clearDisplay() {
             document.getElementById('display').value = '';
         }
@@ -82,7 +79,6 @@
         function calculate(event) {
             event.preventDefault();
             var expression = document.getElementById('display').value;
-            // Отправляем выражение на сервер и обрабатываем результат
             fetch('backend.php', {
                 method: 'POST',
                 headers: {
@@ -92,7 +88,7 @@
             }).
             then(response => { if (response.ok) { return response.headers.get("x-answer") } else { throw response } }).
             then(result => {
-                document.getElementById('display').value = result; // Устанавливаем результат в поле отображения
+                document.getElementById('display').value = result;
             }).
             catch(error => {
                 console.error('Ошибка:', error);

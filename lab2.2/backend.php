@@ -1,5 +1,4 @@
 <?php
-// Check if expression is provided via POST
 if (isset($_POST['expression'])) {
     $expression = $_POST['expression'];
     $result = calculateExpression($expression);
