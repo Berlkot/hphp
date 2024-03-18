@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        /* Styles for a simple appearance */
+        .calculator {
+            width: 250px;
+            margin: 50px auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculator .button-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+
+        .calculator input[type="text"] {
+            text-align: right;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .calculator button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <form class="calculator" onsubmit="calculate(event)">
+        <input type="text" id="display" readonly>
+        <div class="button-container">
+            <button type="button" onclick="addToDisplay('\(')">(</button>
+            <button type="button" onclick="addToDisplay('\)')">)</button>
+            <button type="button" onclick="clearDisplay()">AC</button>
+            <button type="button" onclick="removeCharacter()">C</button>
+            <button type="button" onclick="addToDisplay('1')">1</button>
+            <button type="button" onclick="addToDisplay('2')">2</button>
+            <button type="button" onclick="addToDisplay('3')">3</button>
+            <button type="button" onclick="addToDisplay('+')">+</button>
+            <button type="button" onclick="addToDisplay('4')">4</button>
+            <button type="button" onclick="addToDisplay('5')">5</button>
+            <button type="button" onclick="addToDisplay('6')">6</button>
+            <button type="button" onclick="addToDisplay('-')">-</button>
+            <button type="button" onclick="addToDisplay('7')">7</button>
+            <button type="button" onclick="addToDisplay('8')">8</button>
+            <button type="button" onclick="addToDisplay('9')">9</button>
+            <button type="button" onclick="addToDisplay('*')">*</button>
+            <button type="button" onclick="addToDisplay('0')">0</button>
+            <button type="button" onclick="addToDisplay('.')">.</button>
+            <button type="submit">=</button>
+            <button type="button" onclick="addToDisplay('/')">/</button>
+        </div>
+    </form>
+
+    <script>
+        // Function to add characters to the display
+        function addToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
+
+        // Function to clear the display
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+        function removeCharacter() {
+            document.getElementById('display').value = document.getElementById('display').value.slice(0, -1);
+        }
+
+        function calculate(event) {
+            event.preventDefault();
+            var expression = document.getElementById('display').value;
+            // Отправляем выражение на сервер и обрабатываем результат
+            fetch('backend.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'expression=' + encodeURIComponent(expression)
+            }).
+            then(response => { if (response.ok) { return response.headers.get("x-answer") } else { throw response } }).
+            then(result => {
+                document.getElementById('display').value = result; // Устанавливаем результат в поле отображения
+            }).
+            catch(error => {
+                console.error('Ошибка:', error);
+            });
+        }
+    </script>
+</body>
+
+</html>
