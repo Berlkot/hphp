@@ -13,8 +13,11 @@ $operator_lookup = [
 ];
 
 function calc_if_int($val) {
-    if (is_numeric($val)) {
-        return number_format($val, 4);
+    if (is_numeric($val) && floor($val) != $val) {
+        return (float)$val;
+    }
+    elseif (is_numeric($val)) {
+        return number_format($val);
     } else {
         return calculateExpression($val);
     }
