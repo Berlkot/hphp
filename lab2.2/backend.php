@@ -1,9 +1,4 @@
 <?php
-if (isset($_POST['expression'])) {
-    $expression = $_POST['expression'];
-    $result = calculateExpression($expression);
-    header("X-answer: ".$result);
-}
 
 const operator_lookup = [
     "+" => 1,
@@ -65,3 +60,9 @@ function calculateExpression($expression) {
     return $result;
     
 };
+
+if (isset($_POST['expression'])) {
+    $expression = $_POST['expression'];
+    $result = calculateExpression($expression);
+    header("X-answer: ".$result);
+}
