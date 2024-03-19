@@ -5,7 +5,7 @@ if (isset($_POST['expression'])) {
     header("X-answer: ".$result);
 }
 
-$operator_lookup = [
+const operator_lookup = [
     "+" => 1,
     "-" => 1,
     "*" => 2,
@@ -24,7 +24,6 @@ function calc_if_int($val) {
 };
 
 function calculateExpression($expression) {
-    global $operator_lookup;
     $offset = 0;
     $result = 0;
     preg_match_all("/\((?:[^)(]+|(?R))*+\)|[0-9\.]+|([^0-9]|^)-[0-9\.]+/", $expression, $matches);
@@ -46,7 +45,7 @@ function calculateExpression($expression) {
         if ($offset > count($operators) - 1) {
             $offset = 0;
         }
-        if (count($operators) > $offset + 1 and $operator_lookup[$operators[$offset]] < $operator_lookup[$operators[$offset + 1]]) {
+        if (count($operators) > $offset + 1 and operator_lookup[$operators[$offset]] < operator_lookup[$operators[$offset + 1]]) {
             $offset += 1;
             continue;
         };
