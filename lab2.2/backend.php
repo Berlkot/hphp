@@ -24,7 +24,7 @@ function calc_if_int($val) {
 function calculateExpression($expression) {
     $offset = 0;
     $result = 0;
-    preg_match_all("/((?=[^0-9\-]|^)-)?\((?:[^)(]+|(?R))*+\)|((?=[^0-9\-]|^)-)?[0-9\.]+/", $expression, $matches);
+    preg_match_all("/((?=[^0-9\-]|^)-)?([0-9\.]+|\((?:[^)(]+|(?R))*+\))/", $expression, $matches);
     $matches = $matches[0];
     if ($matches[0] == $expression) {
         while (preg_match_all("/^\(/", $expression) and preg_match_all("/\)$/", $expression)) {
@@ -32,10 +32,10 @@ function calculateExpression($expression) {
         };
         
     }
-    preg_match_all("/((?=[^0-9\-]|^)-)?\((?:[^)(]+|(?R))*+\)|((?=[^0-9\-]|^)-)?[0-9\.]+/", $expression, $matches);
+    preg_match_all("/((?=[^0-9\-]|^)-)?([0-9\.]+|\((?:[^)(]+|(?R))*+\))/", $expression, $matches);
     $matches = $matches[0];
     
-    $operators = str_split(preg_replace("/((?=[^0-9\-]|^)-)?\((?:[^)(]+|(?R))*+\)|((?=[^0-9\-]|^)-)?[0-9\.]+/","", $expression));
+    $operators = str_split(preg_replace("/((?=[^0-9\-]|^)-)?([0-9\.]+|\((?:[^)(]+|(?R))*+\))/","", $expression));
     if (!$operators) {
         return calc_if_int($matches[0]);
     }
