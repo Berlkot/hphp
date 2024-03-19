@@ -27,13 +27,18 @@ function calculateExpression($expression) {
     preg_match_all("/\((?:[^)(]+|(?R))*+\)|[0-9\.]+/", $expression, $matches);
     $matches = $matches[0];
     if ($matches[0] == $expression) {
-        $expression = preg_replace("/(^\()|(\)$)/","", $expression);
+        while (preg_match_all("/(^\()|(\)$)/", $expression)) {
+            $expression = preg_replace("/(^\()|(\)$)/","", $expression);
+        };
+        
     }
     preg_match_all("/\((?:[^)(]+|(?R))*+\)|[0-9\.]+/", $expression, $matches);
     $matches = $matches[0];
     
     $operators = str_split(preg_replace("/\((?:[^)(]+|(?R))*+\)|[0-9\.]+/","", $expression));
-
+    if (!$operators) {
+        return calc_if_int($matches[0]);
+    }
     while ($operators) {
         if ($offset > count($operators) - 1) {
             $offset = 0;
