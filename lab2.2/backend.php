@@ -18,7 +18,10 @@ function calc_if_int($val) {
     }
     elseif (is_numeric($val)) {
         return number_format($val);
-    } else {
+    } elseif ($val[0] == "-") {
+        return - calculateExpression(substr($val, 1));
+    }
+    else {
         return calculateExpression($val);
     }
 };
@@ -26,18 +29,18 @@ function calc_if_int($val) {
 function calculateExpression($expression) {
     $offset = 0;
     $result = 0;
-    preg_match_all("/\((?:[^)(]+|(?R))*+\)|[0-9\.]+|([^0-9]|^)-[0-9\.]+/", $expression, $matches);
+    preg_match_all("/((?=[^0-9\-]|^)-)?\((?:[^)(]+|(?R))*+\)|((?=[^0-9\-]|^)-)?[0-9\.]+/", $expression, $matches);
     $matches = $matches[0];
     if ($matches[0] == $expression) {
-        while (preg_match_all("/(^\()|(\)$)/", $expression)) {
+        while (preg_match_all("/^\(/", $expression) and preg_match_all("/\)$/", $expression)) {
             $expression = preg_replace("/(^\()|(\)$)/","", $expression);
         };
         
     }
-    preg_match_all("/\((?:[^)(]+|(?R))*+\)|[0-9\.]+|([^0-9]|^)-[0-9\.]+/", $expression, $matches);
+    preg_match_all("/((?=[^0-9\-]|^)-)?\((?:[^)(]+|(?R))*+\)|((?=[^0-9\-]|^)-)?[0-9\.]+/", $expression, $matches);
     $matches = $matches[0];
     
-    $operators = str_split(preg_replace("/\((?:[^)(]+|(?R))*+\)|[0-9\.]+|([^0-9]|^)-[0-9\.]+/","", $expression));
+    $operators = str_split(preg_replace("/((?=[^0-9\-]|^)-)?\((?:[^)(]+|(?R))*+\)|((?=[^0-9\-]|^)-)?[0-9\.]+/","", $expression));
     if (!$operators) {
         return calc_if_int($matches[0]);
     }
