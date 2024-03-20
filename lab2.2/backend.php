@@ -39,6 +39,7 @@ function calculateExpression($expression) {
     if (!$operators) {
         return calc_if_int($matches[0]);
     }
+    
     while ($operators) {
         if ($offset > count($operators) - 1) {
             $offset = 0;
@@ -54,7 +55,7 @@ function calculateExpression($expression) {
             "/" => calc_if_int($matches[$offset]) / calc_if_int($matches[$offset+1])
         };
         array_splice($matches, $offset, 2);
-        array_unshift($matches, $result);
+        array_splice($matches, $offset, 0, $result);
         array_splice($operators, $offset, 1);
     };
     return $result;
