@@ -12,7 +12,7 @@ function calc_if_int($val) {
         return (float)$val;
     }
     elseif (is_numeric($val)) {
-        return number_format($val);
+        return (int)$val;
     } elseif ($val[0] == "-") {
         return - calculateExpression(substr($val, 1));
     }
