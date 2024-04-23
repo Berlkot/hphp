@@ -1,11 +1,8 @@
 <?php
 $sql = 'SELECT * FROM `Channel`';
 $res = mysqli_query($connect, $sql);
-if (mysqli_errno($connect))
-    print_r(mysqli_error($connect));
 ?>
 
-<!-- Создание поста -->
 <div class="container">
     <form action="index.php" method="POST">
         <input type="hidden" name="add-post">

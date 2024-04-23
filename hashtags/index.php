@@ -7,9 +7,10 @@ if (mysqli_connect_errno())
 
 // set index to hashtags
 if (!isset($_GET['p'])) {
-    $_GET['p'] = 'hashs';
+    $_GET['p'] = 'tags';
 }
 
+// api
 if (isset($_POST['add-channel'])) {
     $sql = "INSERT INTO `Channel`(
         `name`, `Description`, `fav`) 
@@ -123,14 +124,19 @@ if (isset($_POST['update-field'])) {
 
 
 
-
+// render page
 require ('header.php');
+echo "<main>";
 if (
     isset($_GET['p']) &&
-    ($_GET['p'] == 'hashs' || $_GET['p'] == 'posts' ||
+    ($_GET['p'] == 'tags' || $_GET['p'] == 'posts' ||
         $_GET['p'] == 'channels' || $_GET['p'] == 'fields')
 ) {
     include ($_GET['p'] . '.php');
 }
-
-require ('footer.html');
+echo "</main>";
+echo "<script src='https://code.jquery.com/jquery-3.3.1.slim.min.js' integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo' crossorigin='anonymous'></script>";
+echo "<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js' integrity='sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1' crossorigin='anonymous'></script>";
+echo "<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js' integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM' crossorigin='anonymous'></script>";
+echo "</body>";
+echo "</html>";

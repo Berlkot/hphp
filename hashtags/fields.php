@@ -2,7 +2,6 @@
     $sql = 'SELECT * FROM `hashtags`';
     $res = mysqli_query($connect, $sql);
 ?>
-
 <div class="container">
     <form action="index.php" method="POST">
         <input type="hidden" name="add-field">
@@ -16,25 +15,24 @@
             <label for="description">Описание области знаний</label>
             <textarea required class="form-control" id="description" rows="3" name="description"></textarea>
         </div>
-
+        <div class="form-group">
         <?php
             while ($row = $res->fetch_assoc()) {
-                echo '<input type="checkbox" id="hashtag_' . $row['id'] . '" name="hashtags[]" value="' . $row['name'] . '">';
-                echo '<label for="hashtag_' . $row['id'] . '">' . $row['name'] . '</label><br>';
+                echo '<input type="checkbox" class="form-check-input inp_fx" id="hashtag_' . $row['id'] . '" name="hashtags[]" value="' . $row['name'] . '">';
+                echo '<label class="inp_fx fffix" for="hashtag_' . $row['id'] . '">' . $row['name'] . '</label><br>';
             }
         ?>
-
+        </div>
         <button type="submit" class="btn btn-primary mb-3">Создать область знаний</button>
     </form>
 </div>
-
 <div class="container">
     <form action="index.php" method="POST">
         <input type="hidden" name="update-field">
 
         <h3>Редактирование области знаний</h3>
         <div class="container">
-            <select name="field_id" id="field_id" class="form-control">
+            <select name="field_id" id="field_id" class="form-control fix">
                 <?php
                     $sql = "SELECT `id`, `name` FROM `Field`";
                     $res = mysqli_query($connect, $sql);
@@ -51,15 +49,13 @@
                 $res = mysqli_query($connect, $sql);
                 while ($row = $res->fetch_assoc()) {
                     echo
-                        '<div class="form-check">
-                            <input class="form-check-input update-checkbox" name="hashtags[]" type="checkbox" id="inlineCheckbox' . $row['id'] . '" value="' . $row['name'] . '">
-                            <label class="form-check-label" for="inlineCheckbox' . $row['id'] . '">' . $row['name'] . '</label>
+                        '<div class="form-check ffffix">
+                            <input class="form-check-input update-checkbox ffix" name="hashtags[]" type="checkbox" id="inlineCheckbox' . $row['id'] . '" value="' . $row['name'] . '">
+                            <label class="form-check-label ffix" for="inlineCheckbox' . $row['id'] . '">' . $row['name'] . '</label>
                         </div>';
                 }
             ?>
         </div>
-
-
         <button type="submit" class="btn btn-primary mb-3">Изменить область знаний</button>
     </form>
 </div>
@@ -67,7 +63,7 @@
     let fieldId = document.getElementById('field_id');
     let checkboxes = document.querySelectorAll('#hashtags .form-check-input')
     function makeRequest() {
-        fetch('get_hashtags.php', {
+        fetch('list_tags.php', {
             method: 'POST',
             body: JSON.stringify({ fieldId: fieldId.value }),
             headers: {

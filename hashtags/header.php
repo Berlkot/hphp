@@ -7,17 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div id="navbarNav">
                 <ul class="navbar-nav">
                     <!-- Set active page -->
-                    <?php if (isset($_GET['p']) && $_GET['p'] == 'hashs')
+                    <?php if (isset($_GET['p']) && $_GET['p'] == 'tags')
                         echo '<li class="nav-item active">'; ?>
-                    <a class="nav-link" href="?p=hashs">Хэштеги</a>
+                    <a class="nav-link" href="?p=tags">Хэштеги</a>
                     </li>
                     <?php if (isset($_GET['p']) && $_GET['p'] == 'posts')
                         echo '<li class="nav-item active">'; ?>
@@ -35,5 +36,3 @@
             </div>
         </nav>
     </header>
-
-    <main>

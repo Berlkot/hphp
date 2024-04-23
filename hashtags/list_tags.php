@@ -1,4 +1,5 @@
 <?php
+// this file doesn't have $connect because it is used in ajax
 $db = require ('db.php');
 $connect = mysqli_connect($db['host'], $db['username'], $db['password'], $db['database']);
 
