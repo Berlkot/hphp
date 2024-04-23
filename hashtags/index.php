@@ -6,10 +6,9 @@ if (mysqli_connect_errno())
     print_r(mysqli_connect_error());
 
 // set index to hashtags
-if (!isset($_GET['p']))
+if (!isset($_GET['p'])) {
     $_GET['p'] = 'hashs';
-
-
+}
 
 if (isset($_POST['add-channel'])) {
     $sql = "INSERT INTO `Channel`(
@@ -130,6 +129,8 @@ if (
     isset($_GET['p']) &&
     ($_GET['p'] == 'hashs' || $_GET['p'] == 'posts' ||
         $_GET['p'] == 'channels' || $_GET['p'] == 'fields')
-)
+) {
     include ($_GET['p'] . '.php');
+}
+
 require ('footer.html');

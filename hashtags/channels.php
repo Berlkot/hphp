@@ -3,9 +3,6 @@
 $sql = 'SELECT * FROM `Channel`';
 $res = mysqli_query($connect, $sql);
 
-if (mysqli_errno($connect))
-    print_r(mysqli_error($connect));
-
 ?>
 
 <table class="table">

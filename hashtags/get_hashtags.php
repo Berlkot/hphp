@@ -8,9 +8,6 @@ $data = json_decode($input, true);
 
 if (isset($data['fieldId'])) {
     $fieldId = $data['fieldId'];
-    // Далее обрабатываете $fieldId по вашим нуждам
-} else {
-    // обработка случая, если fieldId отсутствует в данных
 }
 
 $sql = "SELECT h.id, h.name FROM hashtags h INNER JOIN hash_connect hc ON h.id = hc.hash_id WHERE hc.field_id = '$fieldId'";
